@@ -10,13 +10,17 @@
 
 {% block content_title %}
 
-    Index page
+    Keeps
 
 {% endblock %}
 
 
 {% block content %}
 
-    Some content
+    {% for keep in keeps %}
+        <p>
+            <a href="{{ url_for('keep_detail', slug=keep.slug) }}">{{ keep.title }}</a>
+        </p>
+    {% endfor %}
 
 {% endblock %}
