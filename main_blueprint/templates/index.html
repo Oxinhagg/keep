@@ -19,7 +19,7 @@
 
     {% for keep in keeps %}
         <p>
-            <a href="{{ url_for('keep_detail', slug=keep.slug) }}">{{ keep.title }}</a>
+            <a href="{{ url_for('main_blueprint.keep_detail', slug=keep.slug) }}">{{ keep.title }}</a>
         </p>
     {% endfor %}
 

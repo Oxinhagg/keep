@@ -1,4 +1,3 @@
-from app import app
 from flask import render_template
 from flask import request
 from flask import Blueprint
@@ -12,8 +11,7 @@ main_blueprint = Blueprint(
     template_folder='templates'
 )
 
-
-@app.route('/')
+@main_blueprint.route('/')
 def index():
 
     q = request.args.get('q')
@@ -27,7 +25,7 @@ def index():
     return render_template('index.html', keeps=keeps)
 
 
-@app.route('/<slug>')
+@main_blueprint.route('/<slug>')
 def keep_detail(slug):
     keep = Keep.query.filter(Keep.slug == slug).first()
     return render_template('keep_detail.html', keep=keep)
