@@ -1,8 +1,12 @@
 from flask import render_template
 from flask import request
+from flask import redirect
+from flask import url_for
 from flask import Blueprint
+from app import db
 
 
+from .forms import KeepForm
 from models import Keep
 
 main_blueprint = Blueprint(
@@ -10,6 +14,7 @@ main_blueprint = Blueprint(
     __name__,
     template_folder='templates'
 )
+
 
 @main_blueprint.route('/')
 def index():
@@ -23,6 +28,25 @@ def index():
         keeps = Keep.query.all()
 
     return render_template('index.html', keeps=keeps)
+
+
+@main_blueprint.route('/create', methods=['POST', 'GET'])
+def create_keep():
+    if request.method == 'POST':
+        title = request.form['title']
+        body = request.form['body']
+        try:
+            keep = Keep(title=title, body=body)
+            if keep.title:
+                db.session.add(keep)
+                db.session.commit()
+        except:
+            print('Something wrong')
+
+        return redirect(url_for('main_blueprint.index'))
+
+    form = KeepForm()
+    return render_template('create_keep.html', form=form)
 
 
 @main_blueprint.route('/<slug>')
