@@ -49,6 +49,22 @@ def create_keep():
     return render_template('create_keep.html', form=form)
 
 
+@main_blueprint.route('/<slug>/edit/', methods=['POST', 'GET'])
+def edit_keep(slug):
+    keep = Keep.query.filter(Keep.slug == slug).first()
+
+    if request.method == 'POST':
+        form = KeepForm(formdata=request.form, obj=keep)
+        form.populate_obj(keep)
+        db.session.commit()
+
+        return redirect(url_for('main_blueprint.keep_detail',
+                                slug=keep.slug))
+
+    form = KeepForm(obj=keep)
+    return render_template('edit_keep.html', keep=keep, form=form)
+
+
 @main_blueprint.route('/<slug>')
 def keep_detail(slug):
     keep = Keep.query.filter(Keep.slug == slug).first()

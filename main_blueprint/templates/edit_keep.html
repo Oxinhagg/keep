@@ -3,21 +3,21 @@
 
 {% block title %}
 
-    Create new keep
+    Edit keep
 
 {% endblock %}
 
 
 {% block content_title %}
 
-    New keep
+    Edit keep
 
 {% endblock %}
 
 
 {% block content %}
     <div class='col-md-6'>
-        <form action="{{ url_for('main_blueprint.create_keep') }}" method="POST">
+        <form action="{{ url_for('main_blueprint.edit_keep', slug=keep.slug) }}" method="POST">
             
             {% for field in form %}
 
@@ -28,7 +28,7 @@
 
             {% endfor %}
 
-            <button type="submit" class="btn btn-success">Save</button>
+            <button type="submit" class="btn btn-success">Create</button>
         </form>
     </div>
 

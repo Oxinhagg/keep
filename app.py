@@ -3,6 +3,7 @@ from config import Configuration
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
+from flask_admin import Admin
 
 
 app = Flask(__name__)
@@ -13,3 +14,5 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 manager = Manager(app)
 manager.add_command('db', MigrateCommand)
+
+admin = Admin(app)
