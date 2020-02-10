@@ -1,0 +1,11 @@
+.vscode
+.pytest_cache
+
+# Packages
+__pycache__
+
+# Virtual_environment
+env
+
+# datbases
+*.db

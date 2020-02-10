@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+
+    Index page
+
+{% endblock %}
+
+
+{% block content_title %}
+
+    Keeps
+
+{% endblock %}
+
+
+{% block content %}
+
+    {% for keep in keeps %}
+        <p>
+            <a href="{{ url_for('main_blueprint.keep_detail', slug=keep.slug) }}">{{ keep.title }}</a>
+        </p>
+    {% endfor %}
+
+{% endblock %}
