@@ -1,12 +1,10 @@
 <template>
-    <div> 
-        <ul>
-            <KeepItem 
+    <div class> 
+        <KeepItem 
                 v-for="keep in keeps"
                 v-bind:keep="keep"
                 v-on:remove_keep="removeKeep"
             />
-        </ul>
     </div>
 </template>
 
