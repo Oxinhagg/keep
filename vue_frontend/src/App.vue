@@ -6,25 +6,35 @@
     />
     <hr>
     <KeepList 
+      v-if="keeps.length"
       v-bind:keeps="keeps"
       @remove-keep="removeKeep"
     />
+    <p v-else>No keep!</p>
   </div>
 </template>
 
 <script>
 import KeepList from '@/components/KeepList'
 import AddKeep from '@/components/AddKeep'
+import axios from 'axios'
 export default {
   name: 'App',
   data() {
     return {
       keeps: [
-        {id: 1, title: 'Keep 1', body: 'Body keep 1' },
-        {id: 2, title: 'Keep 2', body: 'Body keep 2' },
-        {id: 3, title: 'Keep 3', body: 'Body keep 3' }
+        
       ]
     }
+  },
+  mounted() {
+    var self = this
+    axios  
+    .get('http://localhost:5000/keep/')
+    .then(function (response) {
+      self.keeps = response.data
+    })
+    .catch(error => console.log('error:', error))
   },
   components: {
     KeepList, AddKeep

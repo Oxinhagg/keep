@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
 
@@ -11,6 +12,8 @@ from .keep.views import main_api, ma
 def create_app():
     app = Flask(__name__)
     app.config.from_object(config.Configuration)
+
+    CORS(app)
 
     db.init_app(app)
 
