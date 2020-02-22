@@ -16,19 +16,20 @@ main_api = Blueprint(
 
 class KeepSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'title', 'slug', 'body')
+        fields = ('id', 'title', 'body')
 
 
 keep_schema = KeepSchema()
 keeps_schema = KeepSchema(many=True)
 
 
-def get_keep_for_slug(slug):
-    return Keep.query.filter(Keep.slug == slug).first()
+def get_keep_for_id(id):
+    return Keep.query.filter(Keep.id == id).first()
 
 # Create a keep
 @main_api.route('/', methods=['POST'])
 def add_keep():
+    print(request.json)
     title = request.json['title']
     body = request.json['body']
 
@@ -47,15 +48,15 @@ def get_keeps():
     return jsonify(result)
 
 # Get single keep
-@main_api.route('/<slug>', methods=['GET'])
-def get_keep(slug):
-    keep = get_keep_for_slug(slug)
+@main_api.route('/<id>', methods=['GET'])
+def get_keep(id):
+    keep = get_keep_for_id(id)
     return keep_schema.jsonify(keep)
 
 # Update keep
-@main_api.route('/<slug>', methods=['PUT'])
-def update_keep(slug):
-    keep = get_keep_for_slug(slug)
+@main_api.route('/<id>', methods=['PUT'])
+def update_keep(id):
+    keep = get_keep_for_id(id)
 
     title = request.json['title']
     body = request.json['body']
@@ -68,9 +69,10 @@ def update_keep(slug):
     return keep_schema.jsonify(keep)
 
 # Delete keep
-@main_api.route('/<slug>', methods=['DELETE'])
-def delete_keep(slug):
-    keep = get_keep_for_slug(slug)
+@main_api.route('/<id>', methods=['DELETE'])
+def delete_keep(id):
+    # keep = get_keep_for_id(id)
+    keep = Keep.query.filter(Keep.id == id).first()
     db.session.delete(keep)
     db.session.commit()
 

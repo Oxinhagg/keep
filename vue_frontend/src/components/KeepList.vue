@@ -1,10 +1,11 @@
 <template>
     <div class> 
         <KeepItem 
-                v-for="keep in keeps"
-                v-bind:keep="keep"
-                v-on:remove_keep="removeKeep"
-            />
+            v-for="keep in keeps"
+            v-bind:keep="keep"
+            v-bind:key=keep.id
+            v-on:remove_keep="removeKeep"
+        ></KeepItem> 
     </div>
 </template>
 

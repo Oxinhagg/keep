@@ -1,11 +1,11 @@
 <template>
-    <div id="keep">
+    <div class="keep">
         <div
-            id="keep_title">
+            class="keep_title">
             {{ keep.title }}
         </div>
         <div 
-            id="keep_body"
+            class="keep_body"
             role="textbox"
             aria-multiline="true"
             dir="ltr"
@@ -13,7 +13,7 @@
             {{ keep.body }}
         </div>
         <div
-            id="keep_button">
+            class="keep_button">
             <button class="rm" 
                     v-on:click="$emit('remove_keep', keep.id)">&times;</button>
         </div>
@@ -32,7 +32,7 @@ export default {
 </script>
 
 <style scoped>
-    #keep {
+    .keep {
         border: 1px solid #ccc;
         border-radius: 10px;
         padding: .5rem 2rem;
@@ -42,7 +42,7 @@ export default {
         text-align: left;
     }
 
-    #keep_button {
+    .keep_button {
         text-align: right;
     }
 

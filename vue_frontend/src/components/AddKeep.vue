@@ -1,6 +1,7 @@
 <template>
     <form @submit.prevent="onSubmit">
-        <input type="text" v-model="title">
+        <input type="text" placeholder="title" v-model="title"><br>
+        <input type="text" placeholder="body" v-model="body"><br>
         <button type="submit">Create </button>
     </form>
 </template>
@@ -9,7 +10,8 @@
 export default {
     data(){
         return{
-            title: ''
+            title: '',
+            body: ''
         }
     },
     methods: {
@@ -18,11 +20,12 @@ export default {
                 const newKeep = {
                     id: Date.now(),
                     title: this.title,
-                    body: null
+                    body: this.body
                 };
 
                 this.$emit('add-keep', newKeep)
                 this.title = ''
+                this.body = ''
             }
         }
     }
@@ -30,9 +33,9 @@ export default {
 </script>
 
 <style scoped>
-    form {
+    /* form {
         display: flex; 
-    }
+    } */
     input {
         width: 400px;
     }

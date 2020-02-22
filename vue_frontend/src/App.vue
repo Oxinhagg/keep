@@ -41,10 +41,27 @@ export default {
   },
   methods: {
     removeKeep(id) {
-      this.keeps = this.keeps.filter(k => k.id != id)
+      var self = this
+      axios
+      .delete('http://localhost:5000/keep/' + id)
+      .then(function (response) {
+        self.keeps = self.keeps.filter(k => k.id != id)
+        console.log('delete ', id)
+      })
+      .catch(error => console.log('error:', error))
+      // .catch(error => alert('error! сашка саня хуй соси'))
+
     },
     addKeep(keep){
-      this.keeps.push(keep)
+      var self = this
+      axios
+      .post('http://localhost:5000/keep/', keep)
+      .then(function (response) {
+        console.log('response', response)
+        self.keeps.push(response.data)
+      })
+      // .catch(error => alert('error! сашка саня хуй соси'))
+      .catch(error => console.log('error:', error))
     }
   }
 }
