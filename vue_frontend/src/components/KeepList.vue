@@ -1,12 +1,22 @@
 <template>
-    <div class> 
-        <KeepItem 
-            v-for="keep in keeps"
-            v-bind:keep="keep"
-            v-bind:key=keep.id
-            v-on:remove_keep="removeKeep"
-        ></KeepItem> 
-    </div>
+    <v-row>
+        <v-col cols="12">
+            <v-row
+                :align="start"
+                :justify="start"
+                class="lighten-5" 
+                style="height: 300px;"
+            >
+                <KeepItem 
+                    v-for="keep in keeps"
+                    v-bind:keep="keep"
+                    v-bind:key=keep.id
+                    v-on:remove_keep="removeKeep"
+                    class="ma-6 pa-8" 
+                ></KeepItem>
+            </v-row>
+        </v-col>
+    </v-row>
 </template>
 
 <script>
@@ -25,9 +35,5 @@ export default {
 </script>
 
 <style scoped>
-    ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-    }
+    
 </style>

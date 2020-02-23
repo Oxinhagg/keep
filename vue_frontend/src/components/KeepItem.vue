@@ -1,23 +1,25 @@
 <template>
-    <div class="keep">
-        <div
-            class="keep_title">
-            {{ keep.title }}
-        </div>
-        <div 
-            class="keep_body"
-            role="textbox"
-            aria-multiline="true"
-            dir="ltr"
-        >
-            {{ keep.body }}
-        </div>
-        <div
-            class="keep_button">
-            <button class="rm" 
-                    v-on:click="$emit('remove_keep', keep.id)">&times;</button>
-        </div>
-    </div>
+    <v-card
+        color="light yellow"
+        max-width="344"
+        outlined
+    >
+        <v-list-item three-line>
+            <v-list-item-content>
+            <v-list-item-title class="headline mb-1">{{ keep.title }}</v-list-item-title>
+            <v-list-item-subtitle>{{ keep.body }}</v-list-item-subtitle>
+            </v-list-item-content>
+        </v-list-item>
+    
+        <v-card-actions>
+            <v-btn 
+                text icon color="grey"
+                v-on:click="$emit('remove_keep', keep.id)" 
+            >
+                <v-icon>delete</v-icon>
+            </v-btn>
+        </v-card-actions>
+    </v-card>
 </template>
 
 <script>
@@ -32,21 +34,5 @@ export default {
 </script>
 
 <style scoped>
-    .keep {
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        padding: .5rem 2rem;
-        margin: 1rem;
-        width: 240px;
-        background-color: #ABDB57;
-        text-align: left;
-    }
 
-    .keep_button {
-        text-align: right;
-    }
-
-    input {
-        margin-right: 1rem;
-    }
 </style>

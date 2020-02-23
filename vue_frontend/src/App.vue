@@ -1,17 +1,94 @@
 <template>
-  <div id="app">
-    <h1>Keep aplication</h1>
-    <AddKeep 
-      @add-keep="addKeep" 
-    />
-    <hr>
-    <KeepList 
-      v-if="keeps.length"
-      v-bind:keeps="keeps"
-      @remove-keep="removeKeep"
-    />
-    <p v-else>No keep!</p>
-  </div>
+  <v-app id="keep">
+    <v-app-bar
+      app
+      clipped-left
+      color="amber"
+    >
+      <v-app-bar-nav-icon @click="drawer = !drawer" />
+      <span class="title ml-3 mr-5">&nbsp;<span class="font-weight-light">Keep</span></span>
+      <v-text-field
+        solo-inverted
+        flat
+        hide-details
+        label="Search"
+        prepend-inner-icon="search"
+      />
+
+      <v-spacer />
+    </v-app-bar>
+  <v-navigation-drawer
+      v-model="drawer"
+      app
+      clipped
+      color="grey lighten-4"
+    >
+      <v-list
+        dense
+        class="grey lighten-4"
+      >
+        <template v-for="(item, i) in items">
+          <v-row
+            v-if="item.heading"
+            :key="i"
+            align="center"
+          >
+            <v-col cols="6">
+              <v-subheader v-if="item.heading">
+                {{ item.heading }}
+              </v-subheader>
+            </v-col>
+            <v-col
+              cols="6"
+              class="text-right"
+            >
+              <v-btn
+                small
+                text
+              >edit</v-btn>
+            </v-col>
+          </v-row>
+          <v-divider
+            v-else-if="item.divider"
+            :key="i"
+            dark
+            class="my-4"
+          />
+          <v-list-item
+            v-else
+            :key="i"
+            link
+          >
+            <v-list-item-action>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title class="grey--text">
+                {{ item.text }}
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </template>
+      </v-list>
+    </v-navigation-drawer>
+       <v-content>
+      <v-container
+        fluid
+        class="lighten-4"
+      >
+        
+          <!-- <v-col class="shrink"> -->
+            <KeepList 
+              v-if="keeps.length"
+              v-bind:keeps="keeps"
+              @remove-keep="removeKeep"
+            />
+            <p v-else>No keep!</p>
+          <!-- </v-col> -->
+        
+      </v-container>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
@@ -20,10 +97,30 @@ import AddKeep from '@/components/AddKeep'
 import axios from 'axios'
 export default {
   name: 'App',
+  props: {
+      source: String,
+    },
   data() {
     return {
+      drawer: null,
       keeps: [
         
+      ],
+      items: [
+        { icon: 'lightbulb_outline', text: 'Notes' },
+        { icon: 'touch_app', text: 'Reminders' },
+        { divider: true },
+        { heading: 'Labels' },
+        { icon: 'add', text: 'Create new label' },
+        { divider: true },
+        { icon: 'archive', text: 'Archive' },
+        { icon: 'delete', text: 'Trash' },
+        { divider: true },
+        { icon: 'settings', text: 'Settings' },
+        { icon: 'chat_bubble', text: 'Trash' },
+        { icon: 'help', text: 'Help' },
+        { icon: 'phonelink', text: 'App downloads' },
+        { icon: 'keyboard', text: 'Keyboard shortcuts' },
       ]
     }
   },
@@ -49,7 +146,6 @@ export default {
         console.log('delete ', id)
       })
       .catch(error => console.log('error:', error))
-      // .catch(error => alert('error! сашка саня хуй соси'))
 
     },
     addKeep(keep){
@@ -60,7 +156,6 @@ export default {
         console.log('response', response)
         self.keeps.push(response.data)
       })
-      // .catch(error => alert('error! сашка саня хуй соси'))
       .catch(error => console.log('error:', error))
     }
   }
@@ -68,12 +163,7 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+#keep .v-navigation-drawer__border {
+  display: none
 }
 </style>
