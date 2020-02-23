@@ -71,21 +71,23 @@
         </template>
       </v-list>
     </v-navigation-drawer>
-       <v-content>
+    <v-content>
+      <v-container
+        class="lighten-4"
+      >
+        <AddKeep/>
+      </v-container>
+      
       <v-container
         fluid
         class="lighten-4"
       >
-        
-          <!-- <v-col class="shrink"> -->
-            <KeepList 
-              v-if="keeps.length"
-              v-bind:keeps="keeps"
-              @remove-keep="removeKeep"
-            />
-            <p v-else>No keep!</p>
-          <!-- </v-col> -->
-        
+        <KeepList 
+          v-if="keeps.length"
+          v-bind:keeps="keeps"
+          @remove-keep="removeKeep"
+        />
+        <p v-else>No keep!</p>
       </v-container>
     </v-content>
   </v-app>

@@ -2,8 +2,6 @@
     <v-row>
         <v-col cols="12">
             <v-row
-                :align="start"
-                :justify="start"
                 class="lighten-5" 
                 style="height: 300px;"
             >
