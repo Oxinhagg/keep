@@ -75,7 +75,9 @@
       <v-container
         class="lighten-4"
       >
-        <AddKeep/>
+        <AddKeep
+          @add-keep='addKeep'
+        />
       </v-container>
       
       <v-container

@@ -1,9 +1,11 @@
 <template>
-    <v-card
-          
-    >
+    <v-card>
+        <form
+            @submit.prevent="onSubmit"
+        >
         <v-text-field 
             label="Title"
+            v-model="title"
         ></v-text-field>
         
         <v-textarea
@@ -12,10 +14,12 @@
             auto-grow
             rows="1"
             row-height="15"
+            v-model="body"
         ></v-textarea>
         
-        <v-btn>SAVE</v-btn>
+        <v-btn type="submit">Create</v-btn>
         
+        </form>
     </v-card>
     <!-- 
     <form @submit.prevent="onSubmit">
@@ -43,7 +47,6 @@ export default {
                     title: this.title,
                     body: this.body
                 };
-
                 this.$emit('add-keep', newKeep)
                 this.title = ''
                 this.body = ''
@@ -54,10 +57,12 @@ export default {
 </script>
 
 <style scoped>
-    /* form {
+    /* 
+    form {
         display: flex; 
-    } */
+    } 
     input {
         width: 400px;
-    }
+    } 
+    */
 </style>
